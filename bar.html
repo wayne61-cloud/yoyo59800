@@ -50,7 +50,7 @@
         }
 
         #menuScreen {
-            display: flex;
+            display: flex !important;
             overflow-y: auto;
             background: linear-gradient(135deg, var(--color-dark) 0%, #1a0a2e 100%);
         }
@@ -60,6 +60,7 @@
             max-width: 550px;
             padding: 30px;
             margin: auto;
+            width: 100%;
         }
 
         .menu-title {
@@ -189,7 +190,7 @@
         }
 
         #gameScreen {
-            display: flex;
+            display: none;
             flex-direction: column;
             padding: 10px;
             overflow: hidden;
@@ -295,7 +296,7 @@
 
         .stats-section {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             padding: 12px;
             background: rgba(0, 0, 0, 0.6);
@@ -381,7 +382,7 @@
             padding: 10px;
             border-radius: 6px;
             border: 1px solid rgba(255, 102, 0, 0.2);
-            max-height: 220px;
+            max-height: none;
             overflow-y: auto;
             flex-shrink: 0;
         }
@@ -391,24 +392,6 @@
             grid-template-columns: repeat(6, 1fr);
             gap: 8px;
             width: 100%;
-        }
-
-        @media (max-width: 1200px) {
-            .actions-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-
-        @media (max-width: 900px) {
-            .actions-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .actions-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         .action-btn {
@@ -468,6 +451,8 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             flex-shrink: 0;
+            margin: 0 auto;
+            max-width: 100%;
         }
 
         .btn-control {
@@ -596,8 +581,48 @@
             margin-bottom: 15px;
         }
 
-        #endScreen {
+        .sleep-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(102, 0, 153, 0.3);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2500;
+        }
+
+        .sleep-overlay.show {
             display: flex;
+            animation: sleep-fade 1s;
+        }
+
+        .sleep-content {
+            background: rgba(102, 0, 153, 0.15);
+            border: 4px solid #9933ff;
+            padding: 50px 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(153, 51, 255, 0.5);
+        }
+
+        .sleep-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #9933ff;
+            text-shadow: 0 0 20px #9933ff;
+        }
+
+        .sleep-content p {
+            font-size: 1.3rem;
+            color: #cc99ff;
+            margin-bottom: 15px;
+        }
+
+        #endScreen {
+            display: none;
             overflow-y: auto;
             background: linear-gradient(135deg, #1a0a2e 0%, var(--color-dark) 100%);
         }
@@ -611,6 +636,7 @@
             text-align: center;
             margin: auto;
             box-shadow: 0 0 30px rgba(255, 102, 0, 0.3);
+            width: 100%;
         }
 
         .end-title {
@@ -716,6 +742,11 @@
             color: #ff8800;
         }
 
+        .sleep-notification {
+            border-color: #9933ff;
+            color: #9933ff;
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -738,6 +769,750 @@
             10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
             20%, 40%, 60%, 80% { transform: translateX(10px); }
         }
+
+        @keyframes sleep-fade {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        /* RESPONSIVE MENU DESIGN */
+        @media (max-width: 768px) {
+            .menu-container {
+                padding: 20px;
+            }
+
+            .menu-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .instructions-section {
+                padding: 15px;
+                max-height: 300px;
+            }
+
+            .instructions-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .instructions-section p,
+            .instructions-section ul,
+            .instructions-section li {
+                font-size: 0.75rem;
+            }
+
+            .difficulty-section {
+                padding: 18px;
+            }
+
+            .difficulty-section h3 {
+                font-size: 0.95rem;
+            }
+
+            .radio-btn {
+                font-size: 0.85rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-container {
+                padding: 15px;
+            }
+
+            .menu-title {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .menu-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            .instructions-section {
+                padding: 12px;
+                max-height: 250px;
+                margin-bottom: 20px;
+            }
+
+            .instructions-section h3 {
+                font-size: 0.85rem;
+            }
+
+            .instructions-section p,
+            .instructions-section ul,
+            .instructions-section li {
+                font-size: 0.7rem;
+            }
+
+            .difficulty-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .difficulty-section h3 {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+
+            .radio-group {
+                gap: 8px;
+            }
+
+            .radio-btn {
+                font-size: 0.75rem;
+                padding: 7px;
+            }
+
+            .radio-btn input[type="radio"] {
+                width: 14px;
+                height: 14px;
+                margin-right: 8px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .menu-title {
+                font-size: 1.6rem;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* RESPONSIVE GAME DESIGN */
+        @media (max-width: 1200px) {
+            .actions-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .game-header {
+                gap: 10px;
+                padding: 8px;
+            }
+
+            .game-title {
+                font-size: 1.1rem;
+            }
+
+            .time-display {
+                font-size: 1.6rem;
+            }
+
+            .stat-icon {
+                font-size: 1.8rem;
+            }
+
+            .stat-value {
+                font-size: 1rem;
+            }
+
+            .stat-label {
+                font-size: 0.65rem;
+            }
+
+            .level-info {
+                font-size: 0.7rem;
+            }
+
+            .score-display {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #gameScreen {
+                padding: 8px;
+                gap: 6px;
+            }
+
+            .nav-bar {
+                padding: 6px;
+                gap: 6px;
+            }
+
+            .nav-btn {
+                padding: 7px 10px;
+                font-size: 0.75rem;
+            }
+
+            .game-header {
+                gap: 8px;
+                padding: 7px;
+                grid-template-columns: 1fr 0.8fr 1fr;
+            }
+
+            .game-title {
+                font-size: 0.95rem;
+            }
+
+            .level-info {
+                font-size: 0.65rem;
+            }
+
+            .time-display {
+                font-size: 1.4rem;
+            }
+
+            .status-display {
+                font-size: 0.75rem;
+            }
+
+            .score-display {
+                font-size: 0.8rem;
+            }
+
+            .danger-display {
+                font-size: 0.75rem;
+            }
+
+            .stats-section {
+                gap: 8px;
+                padding: 8px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-icon {
+                font-size: 1.6rem;
+            }
+
+            .stat-label {
+                font-size: 0.65rem;
+            }
+
+            .stat-value {
+                font-size: 1rem;
+            }
+
+            .stat-info {
+                font-size: 0.6rem;
+            }
+
+            .chart-label {
+                font-size: 0.8rem;
+                padding: 4px;
+            }
+
+            .chart-container {
+                padding: 6px;
+                min-height: 150px;
+            }
+
+            .actions-wrapper {
+                max-height: 180px;
+                padding: 8px;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .action-btn {
+                padding: 6px;
+                min-height: 80px;
+                font-size: 0.65rem;
+            }
+
+            .btn-icon {
+                font-size: 1.4rem;
+                margin-bottom: 2px;
+            }
+
+            .btn-name {
+                font-size: 0.6rem;
+                margin-bottom: 1px;
+            }
+
+            .btn-cost {
+                font-size: 0.55rem;
+            }
+
+            .control-buttons {
+                gap: 6px;
+            }
+
+            .btn-control {
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+
+            .pause-content {
+                padding: 30px 25px;
+            }
+
+            .pause-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            .pause-content p {
+                font-size: 0.9rem;
+            }
+
+            .pause-content button {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            .crash-content h2,
+            .sleep-content h2 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .crash-content p,
+            .sleep-content p {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .end-container {
+                padding: 25px;
+                margin: 15px;
+            }
+
+            .end-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .end-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .end-stat-group h3 {
+                font-size: 0.8rem;
+            }
+
+            .end-stat-group p {
+                font-size: 0.8rem;
+            }
+
+            .score-section {
+                padding: 20px;
+            }
+
+            .score-value {
+                font-size: 3rem;
+            }
+
+            .score-rank {
+                font-size: 1rem;
+            }
+
+            .end-buttons {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .notification {
+                font-size: 1.1rem;
+                padding: 20px 30px;
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #gameScreen {
+                padding: 6px;
+                gap: 5px;
+            }
+
+            .nav-bar {
+                padding: 5px;
+                gap: 5px;
+            }
+
+            .nav-btn {
+                padding: 6px 8px;
+                font-size: 0.65rem;
+            }
+
+            .game-header {
+                gap: 6px;
+                padding: 6px;
+                grid-template-columns: 1fr;
+            }
+
+            .header-center,
+            .header-right {
+                margin-top: 3px;
+            }
+
+            .game-title {
+                font-size: 0.85rem;
+            }
+
+            .level-info {
+                font-size: 0.6rem;
+            }
+
+            .time-display {
+                font-size: 1.2rem;
+            }
+
+            .status-display {
+                font-size: 0.65rem;
+            }
+
+            .score-display {
+                font-size: 0.7rem;
+            }
+
+            .danger-display {
+                font-size: 0.65rem;
+            }
+
+            .stats-section {
+                gap: 6px;
+                padding: 6px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-icon {
+                font-size: 1.4rem;
+            }
+
+            .stat-label {
+                font-size: 0.6rem;
+            }
+
+            .stat-value {
+                font-size: 0.9rem;
+            }
+
+            .stat-info {
+                font-size: 0.55rem;
+            }
+
+            .chart-label {
+                font-size: 0.7rem;
+                padding: 3px;
+            }
+
+            .chart-container {
+                padding: 4px;
+                min-height: 120px;
+            }
+
+            .actions-wrapper {
+                max-height: 150px;
+                padding: 6px;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+
+            .action-btn {
+                padding: 5px;
+                min-height: 70px;
+                font-size: 0.6rem;
+            }
+
+            .btn-icon {
+                font-size: 1.2rem;
+                margin-bottom: 1px;
+            }
+
+            .btn-name {
+                font-size: 0.55rem;
+                margin-bottom: 0.5px;
+            }
+
+            .btn-cost {
+                font-size: 0.5rem;
+            }
+
+            .control-buttons {
+                gap: 5px;
+            }
+
+            .btn-control {
+                padding: 6px;
+                font-size: 0.65rem;
+            }
+
+            .pause-content {
+                padding: 20px 15px;
+            }
+
+            .pause-content h2 {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+
+            .pause-content p {
+                font-size: 0.8rem;
+            }
+
+            .pause-content button {
+                padding: 8px 15px;
+                font-size: 0.75rem;
+            }
+
+            .crash-content h2,
+            .sleep-content h2 {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+
+            .crash-content p,
+            .sleep-content p {
+                font-size: 0.95rem;
+                margin-bottom: 8px;
+            }
+
+            .end-container {
+                padding: 15px;
+                border-radius: 10px;
+                margin: 10px;
+            }
+
+            .end-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            .end-stats {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                padding: 12px;
+            }
+
+            .end-stat-group h3 {
+                font-size: 0.75rem;
+            }
+
+            .end-stat-group p {
+                font-size: 0.7rem;
+            }
+
+            .score-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .score-value {
+                font-size: 2.2rem;
+            }
+
+            .score-rank {
+                font-size: 0.9rem;
+            }
+
+            .end-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.75rem;
+            }
+
+            .notification {
+                font-size: 0.95rem;
+                padding: 15px 20px;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .menu-title {
+                font-size: 1.6rem;
+            }
+
+            .game-title {
+                font-size: 0.75rem;
+            }
+
+            .time-display {
+                font-size: 1rem;
+            }
+
+            .stat-icon {
+                font-size: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 0.8rem;
+            }
+
+            .chart-container {
+                min-height: 100px;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-btn {
+                min-height: 60px;
+                font-size: 0.55rem;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* LANDSCAPE MODE OPTIMIZATION - Hauteur réduite */
+        @media (orientation: landscape) and (max-height: 600px) {
+            #gameScreen {
+                gap: 4px;
+            }
+
+            .nav-bar {
+                padding: 4px;
+                gap: 4px;
+            }
+
+            .game-header {
+                gap: 4px;
+                padding: 4px;
+            }
+
+            .stats-section {
+                gap: 4px;
+                padding: 4px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-icon {
+                font-size: 1rem;
+                margin-bottom: 2px;
+            }
+
+            .stat-label {
+                font-size: 0.5rem;
+            }
+
+            .stat-value {
+                font-size: 0.75rem;
+            }
+
+            .chart-section {
+                gap: 2px;
+            }
+
+            .chart-label {
+                font-size: 0.65rem;
+                padding: 3px;
+            }
+
+            .chart-container {
+                padding: 6px;
+                min-height: 80px;
+            }
+
+            .actions-wrapper {
+                max-height: 140px;
+                padding: 6px;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 5px;
+            }
+
+            .action-btn {
+                padding: 4px;
+                min-height: 60px;
+                font-size: 0.55rem;
+            }
+
+            .btn-icon {
+                font-size: 1rem;
+                margin-bottom: 2px;
+            }
+
+            .btn-name {
+                font-size: 0.5rem;
+            }
+
+            .btn-cost {
+                font-size: 0.45rem;
+            }
+
+            .control-buttons {
+                gap: 4px;
+                max-width: 100%;
+                padding: 0 10px;
+            }
+
+            .btn-control {
+                padding: 6px 8px;
+                font-size: 0.6rem;
+            }
+        }
+
+        /* LARGE SCREENS - Tablet/Desktop en paysage - Boutons centrés et plus espacés */
+        @media (orientation: landscape) and (min-height: 600px) {
+            .control-buttons {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .btn-control {
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ULTRA-LARGE SCREENS - Boutons plus grands et centrés */
+        @media (min-width: 1200px) and (min-height: 800px) {
+            .control-buttons {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0 30px;
+            }
+
+            .btn-control {
+                padding: 14px 20px;
+                font-size: 1.05rem;
+            }
+
+            .actions-wrapper {
+                max-height: 300px;
+            }
+
+            .action-btn {
+                min-height: 110px;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -751,7 +1526,7 @@
             <div class="instructions-section">
                 <h3>📖 INSTRUCTIONS COMPLÈTES</h3>
                 
-                <p><strong>🎯 OBJECTIF:</strong> Boire jusqu'à 200 mg/dL = CRASH!</p>
+                <p><strong>🎯 OBJECTIF:</strong> Boire jusqu'à 200 mg/dL = CRASH! Ou boire trop de Purple Drank = SLEEP!</p>
 
                 <p><strong>🔴 ALCOOL (mg/dL):</strong></p>
                 <ul>
@@ -760,6 +1535,16 @@
                     <li>150+: ALERTE CRASH 🚨</li>
                     <li>200+: CRASH IMMÉDIAT! 💀</li>
                     <li>⚠️ PIÈGES: Flirt +6, Danse +8, Parler +3!</li>
+                </ul>
+
+                <p><strong>🟣 PURPLE DRANK (SLEEPINESS):</strong></p>
+                <ul>
+                    <li>Double Cup -25 énergie, +40 sleepiness</li>
+                    <li>0-40: AWAKE ✅</li>
+                    <li>40-80: DROWSY ⚠️</li>
+                    <li>80+: ALERTE SLEEP 😴</li>
+                    <li>100+: FELL ASLEEP! 💤</li>
+                    <li>☕ CAFÉ: -30 sleepiness (recovery!)</li>
                 </ul>
 
                 <p><strong>🟡 FUN INDEX & BONUS:</strong></p>
@@ -782,22 +1567,23 @@
                 <ul>
                     <li>Commence €100</li>
                     <li>Whiskey -€5 (plus cher!)</li>
-                    <li>Nourriture -€2 à -€3.5</li>
-                    <li>FREE: Eau, Danse, Karaoke, Parler, Flirt</li>
+                    <li>Purple Drank -€4 (dangereux!)</li>
+                    <li>Café -€2 (anti-sleep!)</li>
                     <li>≤0€ = GAME OVER BROKE</li>
                 </ul>
 
                 <p><strong>⚡ STRATÉGIE:</strong></p>
                 <ul>
-                    <li>Alcool LENTEMENT (max 60 à la fois)</li>
-                    <li>Cycle: Boisson → Nourriture → Activité</li>
-                    <li>À 150+ = STOP immédiatement!</li>
-                    <li>Gère energy = Gère ton game!</li>
+                    <li>Équilibre ALCOOL + SLEEPINESS!</li>
+                    <li>Purple Drank très DANGEREUX = instant endormissement</li>
+                    <li>Café sauve si trop fatigué</li>
+                    <li>À 150+ alcool OU 100+ sleep = GAME OVER!</li>
                 </ul>
 
                 <p><strong>🎁 BONUS SCORE:</strong></p>
                 <ul>
                     <li>Alcool bas (<80): ×1.15</li>
+                    <li>Sleep bas (<40): ×1.1</li>
                     <li>FUN haut (>100): ×1.25</li>
                     <li>Argent reste (>€50): ×1.2</li>
                 </ul>
@@ -869,10 +1655,16 @@
                 <div class="stat-value"><span id="funVal">50</span></div>
                 <div class="stat-info">💰€<span id="moneyVal">100.00</span></div>
             </div>
+            <div class="stat-item">
+                <div class="stat-icon">🟣</div>
+                <div class="stat-label">SLEEPINESS</div>
+                <div class="stat-value"><span id="sleepVal">0</span></div>
+                <div class="stat-info"><span id="sleepPercent">0</span>%</div>
+            </div>
         </div>
 
         <div class="chart-section">
-            <div class="chart-label">📊 LIVE MARKET - Alcool (🔴) Energy (🔵) Fun (🟡)</div>
+            <div class="chart-label">📊 LIVE MARKET - Alcool (🔴) Energy (🔵) Fun (🟡) Sleep (🟣)</div>
             <div class="chart-container">
                 <canvas id="gameChart" width="1400" height="280"></canvas>
             </div>
@@ -904,6 +1696,15 @@
                 <p>L'économie de la fête s'est effondrée!</p>
             </div>
         </div>
+
+        <div id="sleepOverlay" class="sleep-overlay">
+            <div class="sleep-content">
+                <h2>💤 YOU FELL ASLEEP! 💤</h2>
+                <p>T'AS TROP PRIS DE PURPLE DRANK!</p>
+                <p>😴 LIGHTS OUT!</p>
+                <p>La fête continue sans toi...</p>
+            </div>
+        </div>
     </div>
 
     <!-- END SCREEN -->
@@ -927,8 +1728,9 @@
                 </div>
 
                 <div class="end-stat-group">
-                    <h3>💼 WALLET</h3>
+                    <h3>💼 WALLET & SLEEP</h3>
                     <p>Balance: €<span id="endMoney">0.00</span></p>
+                    <p>Sleep: <span id="endSleep">0</span></p>
                     <p>Level: <span id="endDifficulty">NORMAL</span></p>
                 </div>
             </div>
@@ -957,32 +1759,37 @@
                 this.alcoolValue = 0;
                 this.energyValue = 100;
                 this.funValue = 50;
+                this.sleepValue = 0;
                 this.money = 100;
                 this.score = 0;
                 this.actionsHistory = [];
                 this.dataPoints = [];
                 this.isCrashed = false;
+                this.isSleeping = false;
                 this.crashWarningShown = false;
+                this.sleepWarningShown = false;
             }
 
             getActionEffects() {
                 return {
-                    'biere': { name: 'BIÈRE', icon: '🍺', effects: { alcool: 15, energy: -8, fun: 4, money: -2.5, score: 5 } },
-                    'vin': { name: 'VIN', icon: '🍷', effects: { alcool: 18, energy: -6, fun: 6, money: -4, score: 7 } },
-                    'whiskey': { name: 'WHISKEY', icon: '🥃', effects: { alcool: 28, energy: -12, fun: 8, money: -5, score: 10 } },
-                    'cocktail': { name: 'COCKTAIL', icon: '🍸', effects: { alcool: 12, energy: -4, fun: 10, money: -6, score: 12 } },
-                    'pizza': { name: 'PIZZA', icon: '🍕', effects: { alcool: -8, energy: 20, fun: 8, money: -3, score: 8 } },
-                    'burger': { name: 'BURGER', icon: '🍔', effects: { alcool: -5, energy: 18, fun: 6, money: -2, score: 6 } },
-                    'ramen': { name: 'RAMEN', icon: '🍜', effects: { alcool: -10, energy: 28, fun: 4, money: -3.5, score: 9 } },
-                    'dance': { name: 'DANSER', icon: '💃', effects: { alcool: 8, energy: -18, fun: 30, money: 0, score: 18 } },
-                    'karaoke': { name: 'KARAOKE', icon: '🎤', effects: { alcool: 4, energy: -8, fun: 35, money: -1, score: 20 } },
-                    'games': { name: 'JEUX', icon: '🎮', effects: { alcool: 1, energy: -4, fun: 18, money: -0.5, score: 12 } },
-                    'eau': { name: 'EAU', icon: '💧', effects: { alcool: -6, energy: 10, fun: 0, money: 0, score: 2 } },
-                    'pilule': { name: 'ASPIRIN', icon: '💊', effects: { alcool: -15, energy: 8, fun: 0, money: -2.5, score: 1 } },
-                    'repos': { name: 'SIESTE', icon: '💤', effects: { alcool: -10, energy: 35, fun: 3, money: 0, score: 3 } },
-                    'balade': { name: 'BALADE', icon: '🚶', effects: { alcool: -4, energy: -12, fun: 12, money: -0.5, score: 8 } },
-                    'talk': { name: 'PARLER', icon: '👥', effects: { alcool: 3, energy: -6, fun: 20, money: 0, score: 14 } },
-                    'flirt': { name: 'FLIRTER', icon: '😎', effects: { alcool: 6, energy: -10, fun: 25, money: 0, score: 16 } }
+                    'biere': { name: 'BIÈRE', icon: '🍺', effects: { alcool: 15, energy: -8, fun: 4, sleep: 2, money: -2.5, score: 5 } },
+                    'vin': { name: 'VIN', icon: '🍷', effects: { alcool: 18, energy: -6, fun: 6, sleep: 3, money: -4, score: 7 } },
+                    'whiskey': { name: 'WHISKEY', icon: '🥃', effects: { alcool: 28, energy: -12, fun: 8, sleep: 4, money: -5, score: 10 } },
+                    'cocktail': { name: 'COCKTAIL', icon: '🍸', effects: { alcool: 12, energy: -4, fun: 10, sleep: 2, money: -6, score: 12 } },
+                    'purple': { name: 'PURPLE DRANK', icon: '🟣', effects: { alcool: 0, energy: -25, fun: 5, sleep: 40, money: -4, score: 8 } },
+                    'pizza': { name: 'PIZZA', icon: '🍕', effects: { alcool: -8, energy: 20, fun: 8, sleep: -2, money: -3, score: 8 } },
+                    'burger': { name: 'BURGER', icon: '🍔', effects: { alcool: -5, energy: 18, fun: 6, sleep: -1, money: -2, score: 6 } },
+                    'ramen': { name: 'RAMEN', icon: '🍜', effects: { alcool: -10, energy: 28, fun: 4, sleep: -3, money: -3.5, score: 9 } },
+                    'dance': { name: 'DANSER', icon: '💃', effects: { alcool: 8, energy: -18, fun: 30, sleep: 3, money: 0, score: 18 } },
+                    'karaoke': { name: 'KARAOKE', icon: '🎤', effects: { alcool: 4, energy: -8, fun: 35, sleep: 2, money: -1, score: 20 } },
+                    'games': { name: 'JEUX', icon: '🎮', effects: { alcool: 1, energy: -4, fun: 18, sleep: 1, money: -0.5, score: 12 } },
+                    'eau': { name: 'EAU', icon: '💧', effects: { alcool: -6, energy: 10, fun: 0, sleep: -5, money: 0, score: 2 } },
+                    'cafe': { name: 'CAFÉ', icon: '☕', effects: { alcool: 0, energy: 15, fun: -2, sleep: -30, money: -2, score: 5 } },
+                    'pilule': { name: 'ASPIRIN', icon: '💊', effects: { alcool: -15, energy: 8, fun: 0, sleep: -2, money: -2.5, score: 1 } },
+                    'repos': { name: 'SIESTE', icon: '💤', effects: { alcool: -10, energy: 35, fun: 3, sleep: -25, money: 0, score: 3 } },
+                    'balade': { name: 'BALADE', icon: '🚶', effects: { alcool: -4, energy: -12, fun: 12, sleep: -4, money: -0.5, score: 8 } },
+                    'talk': { name: 'PARLER', icon: '👥', effects: { alcool: 3, energy: -6, fun: 20, sleep: 1, money: 0, score: 14 } },
+                    'flirt': { name: 'FLIRTER', icon: '😎', effects: { alcool: 6, energy: -10, fun: 25, sleep: 2, money: 0, score: 16 } }
                 };
             }
 
@@ -996,14 +1803,21 @@
                 this.alcoolValue += effects.alcool;
                 this.energyValue += effects.energy;
                 this.funValue += effects.fun;
+                this.sleepValue += effects.sleep;
                 this.money += effects.money;
                 this.score += effects.score;
+
+                this.sleepValue = Math.max(0, Math.min(100, this.sleepValue));
 
                 this.actionsHistory.push({ type: actionType, action: action });
 
                 if (this.alcoolValue >= 200) {
                     this.isCrashed = true;
                     return { success: false, reason: 'CRASHED' };
+                }
+                if (this.sleepValue >= 100) {
+                    this.isSleeping = true;
+                    return { success: false, reason: 'SLEPT' };
                 }
                 if (this.energyValue <= 0) return { success: false, reason: 'TIRED' };
                 if (this.money <= 0) return { success: false, reason: 'BROKE' };
@@ -1015,17 +1829,20 @@
                 this.gameTime += deltaTime;
                 this.realTime += deltaTime * this.timeSpeed;
                 this.energyValue -= deltaTime * 0.1;
+                this.sleepValue += deltaTime * 0.08;
                 this.alcoolValue *= (1 - deltaTime * 0.0006);
                 this.funValue *= (1 - deltaTime * 0.0008);
 
                 this.energyValue = Math.max(0, this.energyValue);
                 this.alcoolValue = Math.max(0, this.alcoolValue);
                 this.funValue = Math.max(0, this.funValue);
+                this.sleepValue = Math.max(0, Math.min(100, this.sleepValue));
 
                 this.dataPoints.push({
                     alcool: this.alcoolValue,
                     energy: this.energyValue,
-                    fun: this.funValue
+                    fun: this.funValue,
+                    sleep: this.sleepValue
                 });
 
                 if (this.dataPoints.length > 800) this.dataPoints.shift();
@@ -1039,6 +1856,7 @@
             }
 
             getStatus() {
+                if (this.sleepValue > 80) return '😴 DROWSY';
                 if (this.alcoolValue > 180) return '💀 CRITICAL';
                 if (this.alcoolValue > 150) return '🤪 BLACKOUT';
                 if (this.alcoolValue > 100) return '😵 DRUNK';
@@ -1051,6 +1869,10 @@
 
             shouldWarnCrash() {
                 return this.alcoolValue > 150 && !this.crashWarningShown;
+            }
+
+            shouldWarnSleep() {
+                return this.sleepValue > 80 && !this.sleepWarningShown;
             }
         }
 
@@ -1078,6 +1900,7 @@
                 this.drawSmoothCurve(data.map(d => d.alcool), '#ff0055');
                 this.drawSmoothCurve(data.map(d => d.energy), '#0066ff');
                 this.drawSmoothCurve(data.map(d => d.fun), '#ffff00');
+                this.drawSmoothCurve(data.map(d => d.sleep), '#9933ff');
                 this.drawLegend();
             }
 
@@ -1136,7 +1959,8 @@
                 const legends = [
                     { color: '#ff0055', label: 'Alcool', x: 70 },
                     { color: '#0066ff', label: 'Energy', x: 160 },
-                    { color: '#ffff00', label: 'Fun', x: 240 }
+                    { color: '#ffff00', label: 'Fun', x: 240 },
+                    { color: '#9933ff', label: 'Sleep', x: 310 }
                 ];
 
                 legends.forEach(leg => {
@@ -1211,9 +2035,17 @@
                         UIManager.showWarning('⚠️ ATTENTION! CRASH RISK! 🏠 GO HOME NOW!');
                     }
 
+                    if (this.state.shouldWarnSleep()) {
+                        this.state.sleepWarningShown = true;
+                        UIManager.showSleepWarning('😴 TOO SLEEPY! DRINK CAFÉ! ☕');
+                    }
+
                     if (this.state.isCrashed) {
                         this.showCrash();
                         setTimeout(() => this.endGame('CRASHED'), 3000);
+                    } else if (this.state.isSleeping) {
+                        this.showSleep();
+                        setTimeout(() => this.endGame('SLEPT'), 3000);
                     } else if (this.state.energyValue <= 0) {
                         this.endGame('TIRED');
                     } else if (this.state.money <= 0) {
@@ -1222,6 +2054,9 @@
                 } else if (result.reason === 'CRASHED') {
                     this.showCrash();
                     setTimeout(() => this.endGame('CRASHED'), 3000);
+                } else if (result.reason === 'SLEPT') {
+                    this.showSleep();
+                    setTimeout(() => this.endGame('SLEPT'), 3000);
                 }
             }
 
@@ -1230,289 +2065,221 @@
                 crashOverlay.classList.add('show');
             }
 
+            showSleep() {
+                const sleepOverlay = document.getElementById('sleepOverlay');
+                sleepOverlay.classList.add('show');
+            }
+
             endGame(reason) {
                 this.gameRunning = false;
                 cancelAnimationFrame(this.animationFrameId);
-                const finalStats = this.calculateStats(reason);
-                UIManager.showEndScreen(finalStats);
-            }
-
-            calculateStats(reason) {
-                let finalScore = this.state.score;
-                if (this.state.funValue > 100) finalScore *= 1.25;
-                if (this.state.alcoolValue < 80) finalScore *= 1.15;
-                if (this.state.money > 50) finalScore *= 1.2;
-
-                return {
-                    duration: Math.floor(this.state.gameTime),
-                    reason,
-                    finalAlcool: Math.round(this.state.alcoolValue),
-                    finalEnergy: Math.round(this.state.energyValue),
-                    finalFun: Math.round(this.state.funValue),
-                    finalMoney: Math.round(this.state.money * 100) / 100,
-                    score: Math.round(finalScore),
-                    actions: this.state.actionsHistory.length,
-                    difficulty: this.state.difficulty
-                };
+                UIManager.showEndScreen(this.state, reason);
             }
         }
 
         class UIManager {
             static updateAll(gameState) {
                 document.getElementById('currentTime').textContent = gameState.getFormattedTime();
-                document.getElementById('alcoolVal').textContent = Math.round(gameState.alcoolValue);
-                document.getElementById('alcoolPercent').textContent = Math.min(100, Math.round((gameState.alcoolValue / 200) * 100));
-                document.getElementById('energyVal').textContent = Math.round(gameState.energyValue);
-                document.getElementById('energyPercent').textContent = Math.round((gameState.energyValue / 100) * 100);
-                document.getElementById('funVal').textContent = Math.round(gameState.funValue);
-                document.getElementById('moneyVal').textContent = gameState.money.toFixed(2);
-                document.getElementById('currentScore').textContent = `Score: ${gameState.score} pts`;
                 document.getElementById('gameStatus').textContent = gameState.getStatus();
+                document.getElementById('currentScore').textContent = `Score: ${Math.floor(gameState.score)} pts`;
+                document.getElementById('alcoolVal').textContent = Math.floor(gameState.alcoolValue);
+                document.getElementById('alcoolPercent').textContent = Math.floor((gameState.alcoolValue / 200) * 100);
+                document.getElementById('energyVal').textContent = Math.floor(gameState.energyValue);
+                document.getElementById('energyPercent').textContent = Math.floor((gameState.energyValue / 100) * 100);
+                document.getElementById('funVal').textContent = Math.floor(gameState.funValue);
+                document.getElementById('sleepVal').textContent = Math.floor(gameState.sleepValue);
+                document.getElementById('sleepPercent').textContent = Math.floor(gameState.sleepValue);
+                document.getElementById('moneyVal').textContent = gameState.money.toFixed(2);
 
-                const dangerEl = document.getElementById('dangerLevel');
-                if (gameState.alcoolValue > 180) {
-                    dangerEl.textContent = '💀 CRITICAL!';
-                    dangerEl.style.color = '#ff0055';
-                } else if (gameState.alcoolValue > 150) {
-                    dangerEl.textContent = '🚨 DANGER! 🏠';
-                    dangerEl.style.color = '#ff3300';
-                } else if (gameState.alcoolValue > 80) {
-                    dangerEl.textContent = '⚠️ HIGH!';
-                    dangerEl.style.color = '#ff8800';
-                } else {
-                    dangerEl.textContent = '✅ SAFE';
-                    dangerEl.style.color = '#00ff41';
-                }
+                const danger = gameState.sleepValue > 80 ? '😴 DROWSY' : gameState.alcoolValue > 150 ? '🚨 CRASH RISK' : gameState.alcoolValue > 80 ? '⚠️ DANGER' : '✅ SAFE';
+                document.getElementById('dangerLevel').textContent = danger;
 
-                document.querySelectorAll('.action-btn').forEach(btn => {
-                    const cost = parseFloat(btn.dataset.cost) || 0;
-                    btn.disabled = gameState.money < cost;
-                });
+                const colorMap = { '😴 DROWSY': '#9933ff', '🚨 CRASH RISK': '#ff0055', '⚠️ DANGER': '#ff8800', '✅ SAFE': '#00ff41' };
+                document.getElementById('dangerLevel').style.color = colorMap[danger];
             }
 
-            static showNotification(icon = '💬') {
-                const notif = document.createElement('div');
-                notif.className = 'notification';
-                notif.innerHTML = `<span>${icon}</span>`;
-                document.body.appendChild(notif);
-                notif.offsetWidth;
+            static showNotification(icon) {
+                const notif = document.getElementById('notification') || this.createNotification();
+                notif.textContent = icon;
+                notif.classList.remove('warning-notification', 'sleep-notification');
                 notif.classList.add('show');
+                setTimeout(() => notif.classList.remove('show'), 300);
+            }
+
+            static showWarning(text) {
+                const notif = document.getElementById('notification') || this.createNotification();
+                notif.textContent = text;
+                notif.classList.add('show', 'warning-notification');
+                notif.classList.remove('sleep-notification');
                 setTimeout(() => {
-                    notif.classList.remove('show');
-                    setTimeout(() => notif.remove(), 300);
+                    notif.classList.remove('show', 'warning-notification');
                 }, 2000);
             }
 
-            static showWarning(message) {
-                const notif = document.createElement('div');
-                notif.className = 'notification warning-notification';
-                notif.innerHTML = message;
-                document.body.appendChild(notif);
-                notif.offsetWidth;
-                notif.classList.add('show');
+            static showSleepWarning(text) {
+                const notif = document.getElementById('notification') || this.createNotification();
+                notif.textContent = text;
+                notif.classList.add('show', 'sleep-notification');
+                notif.classList.remove('warning-notification');
                 setTimeout(() => {
-                    notif.classList.remove('show');
-                    setTimeout(() => notif.remove(), 300);
-                }, 3000);
+                    notif.classList.remove('show', 'sleep-notification');
+                }, 2000);
             }
 
-            static showEndScreen(stats) {
-                document.getElementById('endDuration').textContent = stats.duration;
-                document.getElementById('endReason').textContent = stats.reason;
-                document.getElementById('endAlcool').textContent = stats.finalAlcool;
-                document.getElementById('endEnergy').textContent = stats.finalEnergy;
-                document.getElementById('endFun').textContent = stats.finalFun;
-                document.getElementById('endMoney').textContent = stats.finalMoney;
-                document.getElementById('endActions').textContent = stats.actions;
-                document.getElementById('endDifficulty').textContent = stats.difficulty;
-                document.getElementById('endScore').textContent = stats.score;
-                let rank = '😊 OK!';
-                if (stats.score > 700) rank = '👑 GODLIKE!';
-                else if (stats.score > 600) rank = '🏆 EPIC!';
-                else if (stats.score > 500) rank = '🥇 AMAZING!';
-                else if (stats.score > 400) rank = '🥈 GREAT!';
-                else if (stats.score > 300) rank = '🥉 GOOD!';
-                else if (stats.score > 200) rank = '👍 DECENT!';
-                else if (stats.score > 100) rank = '😊 OK!';
-                document.getElementById('endRank').textContent = rank;
-                MenuManager.showEndScreen();
-            }
-        }
-
-        class MenuManager {
-            static showMenuScreen() {
-                document.getElementById('menuScreen').style.display = 'flex';
-                document.getElementById('gameScreen').style.display = 'none';
-                document.getElementById('endScreen').style.display = 'none';
+            static createNotification() {
+                const notif = document.createElement('div');
+                notif.id = 'notification';
+                notif.className = 'notification';
+                document.body.appendChild(notif);
+                return notif;
             }
 
-            static showGameScreen() {
-                document.getElementById('menuScreen').style.display = 'none';
-                document.getElementById('gameScreen').style.display = 'flex';
-                document.getElementById('endScreen').style.display = 'none';
-                document.getElementById('crashOverlay').classList.remove('show');
-                document.getElementById('pauseOverlay').classList.remove('show');
-            }
+            static showEndScreen(gameState, reason) {
+                document.getElementById('endDuration').textContent = Math.floor(gameState.gameTime);
+                document.getElementById('endActions').textContent = gameState.actionsHistory.length;
+                document.getElementById('endReason').textContent = reason;
+                document.getElementById('endAlcool').textContent = Math.floor(gameState.alcoolValue);
+                document.getElementById('endEnergy').textContent = Math.floor(gameState.energyValue);
+                document.getElementById('endFun').textContent = Math.floor(gameState.funValue);
+                document.getElementById('endSleep').textContent = Math.floor(gameState.sleepValue);
+                document.getElementById('endMoney').textContent = gameState.money.toFixed(2);
+                document.getElementById('endDifficulty').textContent = gameState.difficulty;
 
-            static showEndScreen() {
-                document.getElementById('menuScreen').style.display = 'none';
+                let finalScore = Math.floor(gameState.score);
+                if (gameState.alcoolValue < 80) finalScore *= 1.15;
+                if (gameState.sleepValue < 40) finalScore *= 1.1;
+                if (gameState.funValue > 100) finalScore *= 1.25;
+                if (gameState.money > 50) finalScore *= 1.2;
+
+                document.getElementById('endScore').textContent = Math.floor(finalScore);
+                document.getElementById('endRank').textContent = finalScore > 500 ? '🏆 LEGENDARY!' : finalScore > 300 ? '⭐ EXCELLENT!' : '👍 GG!';
+
                 document.getElementById('gameScreen').style.display = 'none';
                 document.getElementById('endScreen').style.display = 'flex';
             }
-
-            static getSelectedDifficulty() {
-                const selected = document.querySelector('input[name="difficulty"]:checked');
-                return selected ? selected.value : 'NORMAL';
-            }
-
-            static setupEventListeners() {
-                document.getElementById('btnNewGame').addEventListener('click', () => {
-                    const difficulty = this.getSelectedDifficulty();
-                    gameEngine = new GameEngine(difficulty);
-                    MenuManager.showGameScreen();
-                    this.setupGameButtons();
-                    gameEngine.startGame();
-                    document.getElementById('btnPlay').disabled = true;
-                    document.getElementById('btnPauseControl').disabled = false;
-                });
-
-                document.getElementById('navMenu').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gameRunning) {
-                        gameEngine.endGame('MENU');
-                        MenuManager.showMenuScreen();
-                    }
-                });
-
-                document.getElementById('navPause').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gameRunning) {
-                        gameEngine.pauseGame();
-                    }
-                });
-
-                document.getElementById('navRestart').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gameRunning) {
-                        const difficulty = gameEngine.state.difficulty;
-                        gameEngine.endGame('RESTART');
-                        gameEngine = new GameEngine(difficulty);
-                        MenuManager.showGameScreen();
-                        MenuManager.setupGameButtons();
-                        gameEngine.startGame();
-                        document.getElementById('btnPlay').disabled = true;
-                        document.getElementById('btnPauseControl').disabled = false;
-                    }
-                });
-
-                document.getElementById('btnPlay').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gamePaused) {
-                        gameEngine.pauseGame();
-                    }
-                });
-
-                document.getElementById('btnPauseControl').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gameRunning) {
-                        gameEngine.pauseGame();
-                    }
-                });
-
-                document.getElementById('btnMenuControl').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gameRunning) {
-                        gameEngine.endGame('MENU');
-                        MenuManager.showMenuScreen();
-                    }
-                });
-
-                document.getElementById('btnResume').addEventListener('click', () => {
-                    if (gameEngine && gameEngine.gamePaused) {
-                        gameEngine.pauseGame();
-                    }
-                });
-
-                document.getElementById('btnBackToMenu').addEventListener('click', () => {
-                    MenuManager.showMenuScreen();
-                });
-
-                document.getElementById('btnReplay').addEventListener('click', () => {
-                    const difficulty = MenuManager.getSelectedDifficulty();
-                    gameEngine = new GameEngine(difficulty);
-                    MenuManager.showGameScreen();
-                    MenuManager.setupGameButtons();
-                    gameEngine.startGame();
-                    document.getElementById('btnPlay').disabled = true;
-                    document.getElementById('btnPauseControl').disabled = false;
-                });
-            }
-
-            static setupGameButtons() {
-                const container = document.getElementById('actionsContainer');
-                container.innerHTML = '';
-
-                const gameState = new GameState();
-                const allActions = gameState.getActionEffects();
-
-                Object.entries(allActions).forEach(([key, action]) => {
-                    const btn = document.createElement('button');
-                    btn.className = 'action-btn';
-                    btn.dataset.action = key;
-                    btn.dataset.cost = action.effects.money === 0 ? '0' : Math.abs(action.effects.money);
-                    btn.innerHTML = `<div class="btn-icon">${action.icon}</div><div class="btn-name">${action.name}</div><div class="btn-cost">${action.effects.money === 0 ? 'FREE' : '€' + Math.abs(action.effects.money).toFixed(2)}</div>`;
-
-                    btn.addEventListener('click', () => {
-                        if (gameEngine && gameEngine.gameRunning && !gameEngine.gamePaused) {
-                            gameEngine.executeAction(key);
-                        }
-                    });
-
-                    container.appendChild(btn);
-                });
-            }
         }
 
-        let gameEngine;
+        let gameEngine = null;
 
-        window.addEventListener('DOMContentLoaded', () => {
-            MenuManager.showMenuScreen();
-            MenuManager.setupEventListeners();
+        // Menu Events
+        document.getElementById('btnNewGame').addEventListener('click', () => {
+            const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+            gameEngine = new GameEngine(difficulty);
+            document.getElementById('menuScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'flex';
+            document.getElementById('currentLevel').textContent = `Level: ${difficulty}`;
+            document.getElementById('btnPlay').disabled = true;
+            document.getElementById('btnPauseControl').disabled = false;
+            gameEngine.startGame();
         });
-    </script>
 
-    <!-- AUTO-ZOOM FIX POUR SAFARI iPHONE -->
-    <script>
-        // Auto-zoom fix pour Safari iPhone
-        window.addEventListener('load', function() {
-            // Désactive le zoom manual
-            document.addEventListener('touchmove', function(e) {
-                if (e.touches.length > 1) e.preventDefault();
-            }, false);
+        // Game Screen Events
+        document.getElementById('navMenu').addEventListener('click', () => {
+            if (gameEngine) {
+                gameEngine.gameRunning = false;
+                cancelAnimationFrame(gameEngine.animationFrameId);
+            }
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('endScreen').style.display = 'none';
+            document.getElementById('menuScreen').style.display = 'flex';
+        });
 
-            // Force le layout viewport
-            const viewport = document.querySelector('meta[name="viewport"]');
-            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+        document.getElementById('navPause').addEventListener('click', () => {
+            if (gameEngine && gameEngine.gameRunning) gameEngine.pauseGame();
+        });
 
-            // Reset zoom après chargement
+        document.getElementById('navRestart').addEventListener('click', () => {
+            if (gameEngine) {
+                gameEngine.gameRunning = false;
+                cancelAnimationFrame(gameEngine.animationFrameId);
+            }
+            const difficulty = gameEngine ? gameEngine.state.difficulty : 'NORMAL';
+            gameEngine = new GameEngine(difficulty);
+            document.getElementById('currentLevel').textContent = `Level: ${difficulty}`;
+            document.getElementById('btnPlay').disabled = true;
+            document.getElementById('btnPauseControl').disabled = false;
+            gameEngine.startGame();
+        });
+
+        document.getElementById('btnPlay').addEventListener('click', () => {
+            if (gameEngine && !gameEngine.gameRunning) gameEngine.startGame();
+            document.getElementById('btnPlay').disabled = true;
+            document.getElementById('btnPauseControl').disabled = false;
+        });
+
+        document.getElementById('btnPauseControl').addEventListener('click', () => {
+            if (gameEngine) gameEngine.pauseGame();
+        });
+
+        document.getElementById('btnMenuControl').addEventListener('click', () => {
+            if (gameEngine) {
+                gameEngine.gameRunning = false;
+                cancelAnimationFrame(gameEngine.animationFrameId);
+            }
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('endScreen').style.display = 'none';
+            document.getElementById('menuScreen').style.display = 'flex';
+        });
+
+        document.getElementById('btnResume').addEventListener('click', () => {
+            if (gameEngine) gameEngine.pauseGame();
+        });
+
+        document.getElementById('btnReplay').addEventListener('click', () => {
+            const difficulty = gameEngine.state.difficulty;
+            gameEngine = new GameEngine(difficulty);
+            document.getElementById('currentLevel').textContent = `Level: ${difficulty}`;
+            document.getElementById('btnPlay').disabled = true;
+            document.getElementById('btnPauseControl').disabled = false;
+            document.getElementById('gameScreen').style.display = 'flex';
+            document.getElementById('endScreen').style.display = 'none';
+            gameEngine.startGame();
+        });
+
+        document.getElementById('btnBackToMenu').addEventListener('click', () => {
+            document.getElementById('endScreen').style.display = 'none';
+            document.getElementById('menuScreen').style.display = 'flex';
+        });
+
+        // Initialize Actions Grid
+        function initializeActionsGrid() {
+            const container = document.getElementById('actionsContainer');
+            const actions = new GameState().getActionEffects();
+
+            Object.entries(actions).forEach(([key, action]) => {
+                const btn = document.createElement('button');
+                btn.className = 'action-btn';
+                btn.innerHTML = `<div class="btn-icon">${action.icon}</div>
+                                 <div class="btn-name">${action.name}</div>
+                                 <div class="btn-cost">${action.effects.money < 0 ? '€' + Math.abs(action.effects.money) : 'FREE'}</div>`;
+                btn.addEventListener('click', () => {
+                    if (gameEngine) gameEngine.executeAction(key);
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        // Handle orientation changes and responsive layout
+        window.addEventListener('orientationchange', () => {
             setTimeout(() => {
                 window.scrollTo(0, 0);
-                document.documentElement.style.zoom = '100%';
+                document.documentElement.style.height = window.innerHeight + 'px';
+                document.body.style.height = window.innerHeight + 'px';
             }, 100);
         });
 
-        // Prévient le zoom au double-tap
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(e) {
-            let now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                e.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Adapte au rotate orientation
-        window.addEventListener('orientationchange', function() {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                document.documentElement.style.zoom = '100%';
-            }, 200);
+        window.addEventListener('resize', () => {
+            document.documentElement.style.height = window.innerHeight + 'px';
+            document.body.style.height = window.innerHeight + 'px';
         });
-    </script>
 
+        // Initial Setup
+        document.documentElement.style.height = window.innerHeight + 'px';
+        document.body.style.height = window.innerHeight + 'px';
+        window.scrollTo(0, 0);
+
+        // Initialize
+        initializeActionsGrid();
+    </script>
 </body>
 </html>
